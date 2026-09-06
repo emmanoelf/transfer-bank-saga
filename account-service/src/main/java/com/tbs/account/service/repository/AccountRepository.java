@@ -41,4 +41,12 @@ public class AccountRepository {
     public Account findById(UUID id) {
         return accounts.get(id);
     }
+
+    public Account findByAgencyAndAccountNumber(String agency, String accountNumber){
+        return this.accounts.values().stream()
+                .filter(account ->
+                    account.getAgency().equals(agency) && account.getAccountNumber().equals(accountNumber)
+                ).findFirst()
+                .orElse(null);
+    }
 }

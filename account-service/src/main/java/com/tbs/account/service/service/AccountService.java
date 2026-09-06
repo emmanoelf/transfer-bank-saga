@@ -5,6 +5,7 @@ import com.tbs.account.service.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service
@@ -14,5 +15,19 @@ public class AccountService {
 
     public Account findById(UUID id){
         return this.accountRepository.findById(id);
+    }
+
+    public Account findByAgencyAndAccountNumber(String agency, String accountNumber){
+        return this.accountRepository.findByAgencyAndAccountNumber(agency, accountNumber);
+    }
+
+    public void debit(String agency, String accountNumber, BigDecimal amount){
+        Account account = this.findByAgencyAndAccountNumber(agency, accountNumber);
+
+        if(account == null){
+            throw new IllegalArgumentException("Account not found");
+        }
+
+        account.debit(amount);
     }
 }
