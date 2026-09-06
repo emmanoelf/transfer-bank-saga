@@ -33,6 +33,17 @@ public class AccountService {
         this.accountRepository.save(account);
     }
 
+    public void credit(String agency, String accountNumber, BigDecimal amount){
+        Account account = this.findByAgencyAndAccountNumber(agency, accountNumber);
+
+        if(account == null){
+            throw new IllegalArgumentException("Account not found");
+        }
+
+        account.credit(amount);
+        this.accountRepository.save(account);
+    }
+
     public Account create(String agency, String accountNumber, BigDecimal initialBalance){
         Account account = new Account(UUID.randomUUID(), agency, accountNumber, initialBalance, AccountStatus.ACTIVE);
         return this.accountRepository.save(account);

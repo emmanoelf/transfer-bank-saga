@@ -14,6 +14,7 @@ public class AccountEventConsumer {
     @KafkaListener(topics = "transfer.created")
     public void consume(TransferCreated event){
         this.accountService.debit(event.senderAgency(), event.senderAccountNumber(), event.amount());
+        this.accountService.credit(event.receiverAgency(), event.receiverAccountNumber(), event.amount());
         System.out.println("Débito realizado para a conta: " + event.senderAccountNumber());
     }
 }
