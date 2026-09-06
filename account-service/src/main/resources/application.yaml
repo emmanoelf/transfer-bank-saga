@@ -7,10 +7,6 @@ spring:
     username: postgres
     password: postgres
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-
   kafka:
     bootstrap-servers: localhost:29092
 

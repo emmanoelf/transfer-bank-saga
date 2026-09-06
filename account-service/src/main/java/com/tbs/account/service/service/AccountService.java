@@ -30,6 +30,7 @@ public class AccountService {
         }
 
         account.debit(amount);
+        this.accountRepository.save(account);
     }
 
     public Account create(String agency, String accountNumber, BigDecimal initialBalance){

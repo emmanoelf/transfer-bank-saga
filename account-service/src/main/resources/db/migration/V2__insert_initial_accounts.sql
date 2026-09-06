@@ -1,0 +1,28 @@
+INSERT INTO accounts (
+    id,
+    agency,
+    account_number,
+    balance,
+    status,
+    created_at,
+    updated_at
+)
+VALUES
+(
+    '11111111-1111-1111-1111-111111111111',
+    '0001',
+    '123456-7',
+    5000.00,
+    'ACTIVE',
+    CURRENT_TIMESTAMP,
+    CURRENT_TIMESTAMP
+),
+(
+    '22222222-2222-2222-2222-222222222222',
+    '0001',
+    '987654-3',
+    1000.00,
+    'ACTIVE',
+    CURRENT_TIMESTAMP,
+    CURRENT_TIMESTAMP
+);
