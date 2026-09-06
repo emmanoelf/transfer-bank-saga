@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: account-service
+
+  kafka:
+    bootstrap-servers: localhost:29092
+
+    consumer:
+      group-id: account-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+      properties:
+        spring.json.trusted.packages: com.tbs.account.service.transfer
+        spring.json.value.default.type: com.tbs.account.service.transfer.TransferCreated
+        spring.json.use.type.headers: false
