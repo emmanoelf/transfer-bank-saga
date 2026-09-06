@@ -12,8 +12,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Transfer {
     private UUID id;
-    private String senderAccount;
-    private String receiverAccount;
+    private String senderAgency;
+    private String senderAccountNumber;
+    private String receiverAgency;
+    private String receiverAccountNumber;
     private BigDecimal amount;
     private TransferStatus status;
 }

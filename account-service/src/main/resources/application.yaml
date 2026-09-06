@@ -14,3 +14,6 @@ spring:
         spring.json.trusted.packages: com.tbs.account.service.transfer
         spring.json.value.default.type: com.tbs.account.service.transfer.TransferCreated
         spring.json.use.type.headers: false
+
+server:
+  port: 8081

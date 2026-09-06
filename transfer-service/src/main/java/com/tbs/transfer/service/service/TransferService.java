@@ -26,8 +26,10 @@ public class TransferService {
     private Transfer toTransfer(TransferRequest request){
         return new Transfer(
                 UUID.randomUUID(),
-                request.senderAccountId(),
-                request.receiverAccountId(),
+                request.senderAgency(),
+                request.senderAccountNumber(),
+                request.receiverAgency(),
+                request.receiverAccountNumber(),
                 request.amount(),
                 TransferStatus.PENDING
         );
@@ -36,8 +38,10 @@ public class TransferService {
     private TransferCreated toTransferCreated(Transfer transfer){
         return new TransferCreated(
                 transfer.getId(),
-                transfer.getSenderAccount(),
-                transfer.getReceiverAccount(),
+                transfer.getSenderAgency(),
+                transfer.getSenderAccountNumber(),
+                transfer.getReceiverAgency(),
+                transfer.getReceiverAccountNumber(),
                 transfer.getAmount()
         );
     }

@@ -5,8 +5,10 @@ import java.util.UUID;
 
 public record TransferCreated(
         UUID transferId,
-        String senderAccountId,
-        String receiverAccountId,
+        String senderAgency,
+        String senderAccountNumber,
+        String receiverAgency,
+        String receiverAccountNumber,
         BigDecimal amount
 ) {
 }
