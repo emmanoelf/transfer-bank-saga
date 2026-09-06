@@ -1,6 +1,7 @@
 package com.tbs.account.service.service;
 
 import com.tbs.account.service.account.Account;
+import com.tbs.account.service.account.AccountStatus;
 import com.tbs.account.service.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,10 @@ public class AccountService {
         }
 
         account.debit(amount);
+    }
+
+    public Account create(String agency, String accountNumber, BigDecimal initialBalance){
+        Account account = new Account(UUID.randomUUID(), agency, accountNumber, initialBalance, AccountStatus.ACTIVE);
+        return this.accountRepository.save(account);
     }
 }
