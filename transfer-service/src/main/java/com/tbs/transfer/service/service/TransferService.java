@@ -1,6 +1,7 @@
 package com.tbs.transfer.service.service;
 
 import com.tbs.transfer.service.producer.TransferEventProducer;
+import com.tbs.transfer.service.repository.TransferRepository;
 import com.tbs.transfer.service.transfer.Transfer;
 import com.tbs.transfer.service.transfer.TransferCreated;
 import com.tbs.transfer.service.transfer.TransferRequest;
@@ -14,9 +15,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TransferService {
     private final TransferEventProducer producer;
+    private final TransferRepository transferRepository;
 
     public void create(TransferRequest request){
         Transfer transfer = this.toTransfer(request);
+        this.transferRepository.save(transfer);
 
         TransferCreated event = this.toTransferCreated(transfer);
 
