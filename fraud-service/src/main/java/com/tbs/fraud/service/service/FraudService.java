@@ -1,18 +1,17 @@
 package com.tbs.fraud.service.service;
 
+import com.tbs.fraud.service.external.FraudProviderClient;
 import com.tbs.fraud.service.fraud.FraudAnalysisRequest;
 import com.tbs.fraud.service.fraud.FraudAnalysisResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @Service
+@RequiredArgsConstructor
 public class FraudService {
-    private static final BigDecimal LIMIT = new BigDecimal("5000");
+    private final FraudProviderClient fraudProviderClient;
 
     public FraudAnalysisResponse analyze(FraudAnalysisRequest fraudAnalysisRequest){
-        boolean isApproved = fraudAnalysisRequest.amount().compareTo(LIMIT) <= 0;
-
-        return new FraudAnalysisResponse(isApproved);
+        return fraudProviderClient.analyze(fraudAnalysisRequest);
     }
 }

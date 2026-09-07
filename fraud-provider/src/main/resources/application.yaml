@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: fraud-provider
+
+server:
+  port: 8083
