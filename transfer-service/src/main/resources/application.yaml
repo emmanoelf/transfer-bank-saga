@@ -2,6 +2,11 @@ spring:
   application:
     name: transfer-service
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/transfer_bank
+    username: postgres
+    password: postgres
+
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
 
