@@ -10,6 +10,17 @@ spring:
             connectTimeout: 2000
             readTimeout: 2000
 
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      group-id: fraud-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.tbs.fraud.service.fraud
+        spring.json.value.default.type: com.tbs.fraud.service.fraud.FraudAnalysisRequest
+        spring.json.use.type.headers: false
+
 fraud-provider:
   url: http://localhost:8083
 
