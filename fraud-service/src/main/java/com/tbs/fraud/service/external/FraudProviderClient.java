@@ -1,7 +1,6 @@
 package com.tbs.fraud.service.external;
 
 import com.tbs.fraud.service.fraud.FraudAnalysisRequest;
-import com.tbs.fraud.service.fraud.FraudAnalysisResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface FraudProviderClient {
 
     @PostMapping("/fraud/analyze")
-    FraudAnalysisResponse analyze(@RequestBody FraudAnalysisRequest fraudAnalysisRequest);
+    FraudProviderResponse analyze(@RequestBody FraudAnalysisRequest fraudAnalysisRequest);
 }

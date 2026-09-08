@@ -2,8 +2,32 @@ spring:
   application:
     name: fraud-service
 
-server:
-  port: 8082
+  cloud:
+    openfeign:
+      client:
+        config:
+          fraud-provider:
+            connectTimeout: 2000
+            readTimeout: 2000
 
 fraud-provider:
   url: http://localhost:8083
+
+server:
+  port: 8082
+
+resilience4j:
+  retry:
+    instances:
+      fraudProvider:
+        max-attempts: 3
+        wait-duration: 500ms
+
+  circuitbreaker:
+    instances:
+      fraudProvider:
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 5
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
