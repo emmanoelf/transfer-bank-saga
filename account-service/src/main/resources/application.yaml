@@ -20,5 +20,9 @@ spring:
         spring.json.value.default.type: com.tbs.account.service.transfer.TransferCreated
         spring.json.use.type.headers: false
 
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 server:
   port: 8081
