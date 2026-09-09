@@ -1,6 +1,6 @@
 package com.tbs.transfer.service.service;
 
-import com.tbs.transfer.service.producer.TransferEventProducer;
+import com.tbs.transfer.service.kafka.TransferEventProducer;
 import com.tbs.transfer.service.repository.TransferRepository;
 import com.tbs.transfer.service.transfer.Transfer;
 import com.tbs.transfer.service.transfer.TransferCreated;

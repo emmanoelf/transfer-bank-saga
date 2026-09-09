@@ -1,4 +1,4 @@
-package com.tbs.transfer.service.producer;
+package com.tbs.transfer.service.kafka;
 
 import com.tbs.transfer.service.transfer.TransferCreated;
 import org.springframework.kafka.core.KafkaTemplate;
