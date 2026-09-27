@@ -20,8 +20,10 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: com.tbs.transfer.service.transfer
-        spring.json.value.default.type: com.tbs.transfer.service.transfer.DebitCompleted
-        spring.json.use.type.headers: false
+        spring.json.use.type.headers: true
+        spring.json.type.mapping: >
+          debit-completed:com.tbs.transfer.service.transfer.DebitCompleted,
+          fraud-analysis-result:com.tbs.transfer.service.transfer.FraudAnalysisResult
 
 server:
   port: 8080
