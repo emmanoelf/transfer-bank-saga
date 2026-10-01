@@ -15,17 +15,19 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.type.mapping: >
-          debit-completed:com.tbs.account.service.transfer.DebitCompleted
+          debit-completed:com.tbs.account.service.transfer.DebitCompleted,
+          credit-completed:com.tbs.account.service.transfer.CreditCompleted
 
     consumer:
       group-id: account-service
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-
       properties:
         spring.json.trusted.packages: com.tbs.account.service.transfer
-        spring.json.value.default.type: com.tbs.account.service.transfer.TransferCreated
-        spring.json.use.type.headers: false
+        spring.json.use.type.headers: true
+        spring.json.type.mapping: >
+          transfer-created:com.tbs.account.service.transfer.TransferCreated,
+          credit-requested:com.tbs.account.service.transfer.CreditRequested
 
 server:
   port: 8081

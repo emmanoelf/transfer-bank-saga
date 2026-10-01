@@ -2,6 +2,8 @@ package com.tbs.account.service.consumer;
 
 import com.tbs.account.service.kafka.AccountEventProducer;
 import com.tbs.account.service.service.AccountService;
+import com.tbs.account.service.transfer.CreditCompleted;
+import com.tbs.account.service.transfer.CreditRequested;
 import com.tbs.account.service.transfer.DebitCompleted;
 import com.tbs.account.service.transfer.TransferCreated;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +27,18 @@ public class AccountEventConsumer {
 
         this.accountEventProducer.publish(debitCompleted);
         System.out.println("DEBIT COMPLETED PUBLICADO: " + debitCompleted);
+    }
+
+    @KafkaListener(topics = "credit.requested")
+    public void consume(CreditRequested event){
+        this.accountService.credit(event.receiverAgency(), event.receiverAccountNumber(), event.amount());
+        CreditCompleted creditCompleted = new CreditCompleted(
+                event.transferId(),
+                event.receiverAgency(),
+                event.receiverAccountNumber(),
+                event.amount());
+
+        this.accountEventProducer.publish(creditCompleted);
+        System.out.println("CREDIT COMPLETED PUBLISHED: " + creditCompleted);
     }
 }

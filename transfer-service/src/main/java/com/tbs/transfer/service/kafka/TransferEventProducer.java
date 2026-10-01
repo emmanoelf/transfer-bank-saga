@@ -1,5 +1,6 @@
 package com.tbs.transfer.service.kafka;
 
+import com.tbs.transfer.service.transfer.CreditRequested;
 import com.tbs.transfer.service.transfer.FraudAnalysisRequest;
 import com.tbs.transfer.service.transfer.TransferCreated;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class TransferEventProducer {
     private static final String TRANSFER_CREATED_TOPIC = "transfer.created";
     private static final String FRAUD_ANALYSIS_REQUESTED_TOPIC = "fraud.analysis.requested";
+    private static final String CREDIT_REQUESTED_TOPIC = "credit.requested";
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public void publish(TransferCreated event){
@@ -19,5 +21,9 @@ public class TransferEventProducer {
 
     public void publish(FraudAnalysisRequest event){
         this.kafkaTemplate.send(FRAUD_ANALYSIS_REQUESTED_TOPIC, event);
+    }
+
+    public void publish(CreditRequested event){
+        this.kafkaTemplate.send(CREDIT_REQUESTED_TOPIC, event);
     }
 }

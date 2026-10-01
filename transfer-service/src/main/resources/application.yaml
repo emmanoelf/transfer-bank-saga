@@ -13,6 +13,10 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: >
+          transfer-created:com.tbs.transfer.service.transfer.TransferCreated,
+          credit-requested:com.tbs.transfer.service.transfer.CreditRequested
 
     consumer:
       group-id: transfer-service

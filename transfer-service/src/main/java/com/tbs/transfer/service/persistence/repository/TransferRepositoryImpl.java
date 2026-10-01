@@ -7,6 +7,7 @@ import com.tbs.transfer.service.transfer.Transfer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -15,11 +16,10 @@ public class TransferRepositoryImpl implements TransferRepository {
     private final TransferJpaRepository transferJpaRepository;
 
     @Override
-    public Transfer findById(UUID id) {
+    public Optional<Transfer> findById(UUID id) {
         return this.transferJpaRepository
                 .findById(id)
-                .map(TransferMapper::toDomain)
-                .orElse(null);
+                .map(TransferMapper::toDomain);
     }
 
     @Override
