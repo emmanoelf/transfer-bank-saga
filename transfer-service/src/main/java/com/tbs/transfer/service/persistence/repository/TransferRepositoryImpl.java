@@ -4,6 +4,7 @@ import com.tbs.transfer.service.persistence.entity.TransferEntity;
 import com.tbs.transfer.service.persistence.mapper.TransferMapper;
 import com.tbs.transfer.service.repository.TransferRepository;
 import com.tbs.transfer.service.transfer.Transfer;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +24,16 @@ public class TransferRepositoryImpl implements TransferRepository {
     }
 
     @Override
+    @Transactional
     public Transfer save(Transfer transfer) {
-        TransferEntity entity = TransferMapper.toEntity(transfer);
+        TransferEntity entity = this.transferJpaRepository
+                .findById(transfer.getId())
+                .map(existingEntity -> {
+                    TransferMapper.updateEntity(transfer, existingEntity);
+                    return existingEntity;
+                })
+                .orElseGet(() -> TransferMapper.toEntity(transfer));
+
         TransferEntity savedEntity = this.transferJpaRepository.save(entity);
 
         return TransferMapper.toDomain(savedEntity);

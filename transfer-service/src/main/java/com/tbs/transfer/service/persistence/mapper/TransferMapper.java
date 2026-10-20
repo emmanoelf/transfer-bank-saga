@@ -27,4 +27,13 @@ public class TransferMapper {
                 transfer.getStatus()
         );
     }
+
+    public static void updateEntity(Transfer transfer, TransferEntity entity) {
+        entity.setSenderAgency(transfer.getSenderAgency());
+        entity.setSenderAccountNumber(transfer.getSenderAccountNumber());
+        entity.setReceiverAgency(transfer.getReceiverAgency());
+        entity.setReceiverAccountNumber(transfer.getReceiverAccountNumber());
+        entity.setAmount(transfer.getAmount());
+        entity.setStatus(transfer.getStatus());
+    }
 }

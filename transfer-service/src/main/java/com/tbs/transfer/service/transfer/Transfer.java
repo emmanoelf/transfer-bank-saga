@@ -18,4 +18,16 @@ public class Transfer {
     private String receiverAccountNumber;
     private BigDecimal amount;
     private TransferStatus status;
+
+    public void complete(){
+        if(this.status == TransferStatus.COMPLETED){
+            return;
+        }
+
+        if(this.status == TransferStatus.FAILED){
+            throw new IllegalStateException("Cannot complete a failed transfer: " + this.id);
+        }
+
+        this.status = TransferStatus.COMPLETED;
+    }
 }
