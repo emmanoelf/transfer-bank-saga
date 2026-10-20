@@ -27,7 +27,8 @@ spring:
         spring.json.use.type.headers: true
         spring.json.type.mapping: >
           debit-completed:com.tbs.transfer.service.transfer.DebitCompleted,
-          fraud-analysis-result:com.tbs.transfer.service.transfer.FraudAnalysisResult
+          fraud-analysis-result:com.tbs.transfer.service.transfer.FraudAnalysisResult,
+          credit-completed:com.tbs.transfer.service.transfer.CreditCompleted
 
 server:
   port: 8080

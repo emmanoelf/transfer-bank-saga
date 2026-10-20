@@ -39,4 +39,15 @@ public class TransferEventConsumer {
         this.transferEventProducer.publish(creditRequested);
         System.out.println("CREDIT REQUESTED PUBLICADO: " + creditRequested);
     }
+
+    @KafkaListener(topics = "credit.completed")
+    public void consume(CreditCompleted event){
+        Transfer transfer = this.transferRepository.findById(event.transferId())
+                .orElseThrow(() -> new IllegalStateException("Transfer not found: " + event.transferId()));
+
+        transfer.complete();
+        this.transferRepository.save(transfer);
+
+        System.out.println("TRANSFER COMPLETED: " + transfer.getId());
+    }
 }
