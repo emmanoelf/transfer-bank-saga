@@ -24,4 +24,14 @@ public class AccountMapper {
                 account.getStatus()
         );
     }
+
+    public static void updateEntity(
+            Account account,
+            AccountEntity entity
+    ) {
+        entity.setAgency(account.getAgency());
+        entity.setAccountNumber(account.getAccountNumber());
+        entity.setBalance(account.getBalance());
+        entity.setStatus(account.getStatus());
+    }
 }
