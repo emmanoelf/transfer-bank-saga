@@ -18,7 +18,7 @@ public class AccountEventConsumer {
 
     @KafkaListener(topics = "transfer.created")
     public void consume(TransferCreated event){
-        this.accountService.debit(event.senderAgency(), event.senderAccountNumber(), event.amount());
+        this.accountService.debit(event.transferId(), event.senderAgency(), event.senderAccountNumber(), event.amount());
         DebitCompleted debitCompleted = new DebitCompleted(
                 event.transferId(),
                 event.senderAgency(),
@@ -31,7 +31,7 @@ public class AccountEventConsumer {
 
     @KafkaListener(topics = "credit.requested")
     public void consume(CreditRequested event){
-        this.accountService.credit(event.receiverAgency(), event.receiverAccountNumber(), event.amount());
+        this.accountService.credit(event.transferId(), event.receiverAgency(), event.receiverAccountNumber(), event.amount());
         CreditCompleted creditCompleted = new CreditCompleted(
                 event.transferId(),
                 event.receiverAgency(),
